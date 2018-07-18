@@ -1,0 +1,35 @@
+<?php
+ 
+ ?>
+ ob_start();
+ $API_KEY='697485150:AAHkT8NU7LF9qF2En-T7ysrcLDIjRZNzV3U'
+ if ($text == '/start') { 
+    file_put_contents("s.txt",$chat_id."\n",FILE_APPEND);
+    if(!isset($json[$chat_id])){
+      $json[$chat_id]['num'] = 0;
+      $json[$chat_id]['collect'] = 0;
+      file_put_contents("data.json", json_encode($json));
+    }
+  
+  bot('sendMessage',[
+    'chat_id'=>$chat_id,
+    'text'=>"مرحبا بك في بوت سايفون فقط اضغط على رابط وسيتم تفعيله",
+    'reply_markup'=>json_encode([
+      'inline_keyboard'=>[
+        [['text'=>"الولايات المتحدة",'callback_data'=>"collect"]],
+        [['text'=>'قائمه الشراء 🔖','callback_data'=>"sale"]],
+        [['text'=>"اضغط هنا ⚡️",'url'=>"https://urldirector.net/?sponsor_id=87A61D4B5D333603&sponsor=87A61D4B5D333603&client_region=IQ&client_platform=android&secret=580EfjEI29xL3hoyU6dgP4vSEVxdcGI7JDFkxgjds7PHulSEF0wmORpvzbqxyTwYtpowsY4xMFnfWEnTghe6l8jiV9K5QSZoir2i6fDeKJD6EhL6DkoYTEMu2EE9YJvy3LdCUZ7ncdVC6ipgWx06wznvDLbY1ajfcfRGCpfsQJei2q6tb0GSFh1QK3x3qXKwyjmNPc5J&psiphon_show_ads&psiphon_external_homepage"]]
+      ]
+      ])
+    ]);
+}
+if ($data == 'start') {
+  bot('sendMessage',[
+        'chat_id'=>$chat_id2,
+         'text'=>"القناه 📩 :- ".$ch['ch'][$json[$chat_id2]['num']]['username']."\nاشترك بها ثم اظغط متابعه ",
+        'reply_markup'=>json_encode([
+          'inline_keyboard'=>[
+        [['text'=>"متابعه 🏷",'callback_data'=>"con#".$ch['ch'][$json[$chat_id2]['num']]['username']]],
+          ]])
+        ]);
+}$ex_data = explode("#", $data);
